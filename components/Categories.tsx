@@ -45,7 +45,12 @@ export default function Categories({ onCategoryChanged }: Props) {
             style={[styles.item, activeIndex === index && styles.itemActive]}
             onPress={() => handleSelectCategory(index)}
           >
-            <Text style={[, activeIndex === index && styles.itemTxtActive]}>
+            <Text
+              style={[
+                styles.itemTxt,
+                activeIndex === index && styles.itemTxtActive,
+              ]}
+            >
               {item.title}
             </Text>
           </TouchableOpacity>
