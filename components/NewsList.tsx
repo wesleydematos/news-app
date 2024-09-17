@@ -1,7 +1,8 @@
 import { Colors } from "@/constants/Colors";
 import { NewsDataType } from "@/types";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import Loading from "./Loading";
+import { Link } from "expo-router";
 
 type Props = {
   newsList: Array<NewsDataType>;
@@ -14,20 +15,31 @@ export default function NewsList({ newsList }: Props) {
         <Loading size="large" />
       ) : (
         newsList.map((item, index) => (
-          <View key={index} style={styles.itemContainer}>
-            <Image source={{ uri: item.image_url }} style={styles.itemImg} />
-            <View style={styles.itemInfo}>
-              <Text style={styles.itemCategory}>{item.category}</Text>
-              <Text style={styles.itemTitle}>{item.title}</Text>
-              <View style={styles.itemSourceInfo}>
+          <Link key={index} href={`/news/${item.article_id}`} asChild>
+            <TouchableOpacity>
+              <View style={styles.itemContainer}>
                 <Image
-                  source={{ uri: item.source_icon }}
-                  style={styles.itemSourceImg}
+                  source={{ uri: item.image_url }}
+                  style={styles.itemImg}
                 />
-                <Text style={styles.itemSourceName}>{item.source_name}</Text>
+                <View style={styles.itemInfo}>
+                  <Text style={styles.itemCategory}>{item.category}</Text>
+                  <Text numberOfLines={3} style={styles.itemTitle}>
+                    {item.title}
+                  </Text>
+                  <View style={styles.itemSourceInfo}>
+                    <Image
+                      source={{ uri: item.source_icon }}
+                      style={styles.itemSourceImg}
+                    />
+                    <Text style={styles.itemSourceName}>
+                      {item.source_name}
+                    </Text>
+                  </View>
+                </View>
               </View>
-            </View>
-          </View>
+            </TouchableOpacity>
+          </Link>
         ))
       )}
     </View>
