@@ -42,7 +42,6 @@ export default function BreakingNews({ newsList }: Props) {
   });
 
   useEffect(() => {
-    console.log(width);
     if (isAutoPlay === true) {
       interval.current = setInterval(() => {
         offset.value = offset.value + width;
