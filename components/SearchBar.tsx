@@ -4,9 +4,13 @@ import { View, StyleSheet, TextInput } from "react-native";
 
 type Props = {
   withHorizontalPadding: boolean;
+  setSearchQuery: Function;
 };
 
-export default function SearchBar({ withHorizontalPadding }: Props) {
+export default function SearchBar({
+  withHorizontalPadding,
+  setSearchQuery,
+}: Props) {
   return (
     <View
       style={[
@@ -21,6 +25,7 @@ export default function SearchBar({ withHorizontalPadding }: Props) {
           placeholderTextColor={Colors.lightGrey}
           style={styles.searchTxt}
           autoCapitalize="none"
+          onChangeText={(query) => setSearchQuery(query)}
         />
       </View>
     </View>
